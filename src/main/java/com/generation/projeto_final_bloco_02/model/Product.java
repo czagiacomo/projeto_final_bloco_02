@@ -2,10 +2,13 @@ package com.generation.projeto_final_bloco_02.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -22,12 +25,15 @@ public class Product {
 	
 	@NotBlank(message =  "O nome do produto é obrigatório")
 	@Size(min = 5, max = 255, message = "O nome deve conter entre 05 e 255 caracteres")
-	private String prodName;
+	private String productName;
 	
-	@NotBlank
 	@PositiveOrZero
 	@Digits(integer = 10, fraction = 2)
 	private BigDecimal price;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("product")
+	private Category category;
 
 	public Long getId() {
 		return id;
@@ -37,12 +43,12 @@ public class Product {
 		this.id = id;
 	}
 
-	public String getProdName() {
-		return prodName;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setProdName(String prodName) {
-		this.prodName = prodName;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	public BigDecimal getPrice() {
@@ -51,6 +57,14 @@ public class Product {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
-	}	
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	
 }
