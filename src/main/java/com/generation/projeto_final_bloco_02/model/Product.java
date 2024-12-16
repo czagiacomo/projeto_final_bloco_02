@@ -34,6 +34,15 @@ public class Product {
 	@ManyToOne
 	@JsonIgnoreProperties("product")
 	private Category category;
+	
+	public Product(Long id, String productName, BigDecimal price) {
+		this.id = id;
+		this.productName = productName;
+		this.price = price;
+	}
+	
+	public Product() { }
+
 
 	public Long getId() {
 		return id;
